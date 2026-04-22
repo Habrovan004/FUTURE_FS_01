@@ -7,6 +7,7 @@
 <meta property="og:title" content="Hagai John Mkawe – Full Stack Developer"/>
 <meta property="og:description" content="Portfolio of Hagai John Mkawe, Full Stack Developer & CS Student at Ardhi University."/>
 <title>Hagai John Mkawe</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -293,6 +294,54 @@ section{
 }
 .contact-val{font-size:13px;font-weight:500;color:var(--accent);word-break:break-all;}
 
+/* CONTACT FORM */
+.contact-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:2.5rem;align-items:start;}
+.contact-info-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:0.5rem;}
+.contact-info-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:1.75rem;}
+.contact-links{display:flex;flex-direction:column;gap:10px;}
+.contact-item{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:1rem 1.25rem;text-decoration:none;display:block;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.contact-item:hover{border-color:var(--accent);transform:translateY(-2px);}
+.contact-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;}
+.contact-val{font-size:13px;font-weight:500;color:var(--accent);word-break:break-all;}
+.contact-form{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.75rem;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.form-group label{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;}
+.form-group input,
+.form-group textarea{
+  background:var(--surface2);border:1px solid var(--border);border-radius:10px;
+  color:var(--text);font-family:'Inter',sans-serif;font-size:14px;
+  padding:11px 14px;outline:none;transition:border-color 0.2s;resize:none;
+}
+.form-group input:focus,
+.form-group textarea:focus{border-color:var(--accent);}
+.form-group input::placeholder,
+.form-group textarea::placeholder{color:var(--muted);}
+.form-submit{
+  width:100%;background:var(--accent);color:#fff;border:none;
+  padding:13px;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;
+  font-weight:500;cursor:pointer;transition:opacity 0.2s,transform 0.2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.form-submit:hover{opacity:0.88;transform:translateY(-1px);}
+.form-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.form-status{
+  margin-top:12px;padding:10px 14px;border-radius:10px;font-size:13px;
+  display:none;text-align:center;font-weight:500;
+}
+.form-status.success{background:rgba(62,207,142,0.12);color:#3ecf8e;border:1px solid rgba(62,207,142,0.25);display:block;}
+.form-status.error{background:rgba(226,75,74,0.12);color:#e24b4a;border:1px solid rgba(226,75,74,0.25);display:block;}
+@media(max-width:768px){
+  .contact-layout{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+
 /* FOOTER */
 .footer-wrap{border-top:1px solid var(--border);}
 footer{
@@ -333,7 +382,7 @@ footer{
 <body>
 
 <nav>
-  <span class="nav-logo">H<span>.</span>J<span>.</span>M</span>
+  <span class="nav-logo">H<span>.</span>JM</span>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
@@ -372,6 +421,10 @@ footer{
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
         <a href="mailto:mkawehagai@gmail.com" class="btn-outline">Get In Touch</a>
+        <a href="Hagai_Mkawe_Resume.pdf" download class="btn-outline">
+          Download CV
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
       </div>
     </div>
     <div class="hero-card">
@@ -391,7 +444,7 @@ footer{
   <h2 class="section-title">Who I am</h2>
   <div class="about-grid reveal">
     <div class="about-text">
-      <p>I'm a Information System Management student at Ardhi University, Dar es Salaam, passionate about building full-stack web and mobile applications. I enjoy working across the entire development stack — from crafting clean UIs to designing robust backend APIs and databases.</p>
+      <p>I'm a Computer Science student at Ardhi University, Dar es Salaam, passionate about building full-stack web and mobile applications. I enjoy working across the entire development stack — from crafting clean UIs to designing robust backend APIs and databases.</p>
       <p>I have hands-on experience with modern frameworks including Next.js, Express.js, and Flutter, and I'm comfortable working with both relational (MySQL) and NoSQL (MongoDB, Firebase) databases. I also work with DevOps tools like Docker and GitHub Actions to build reliable CI/CD pipelines.</p>
     </div>
     <div class="about-stats">
@@ -465,7 +518,7 @@ footer{
       <div class="edu-icon">🎓</div>
       <div>
         <div class="edu-school">Ardhi University</div>
-        <div class="edu-degree">Bachelor of Science in Information System Management</div>
+        <div class="edu-degree">Bachelor of Science in Computer Science</div>
         <div class="edu-year">Dar es Salaam, Tanzania &middot; In progress</div>
       </div>
     </div>
@@ -475,23 +528,57 @@ footer{
 <section id="contact">
   <p class="section-label">Contact</p>
   <h2 class="section-title">Let's work together</h2>
-  <div class="contact-grid reveal">
-    <a class="contact-item" href="mailto:mkawehagai@gmail.com">
-      <div class="contact-label">Email</div>
-      <div class="contact-val">mkawehagai@gmail.com</div>
-    </a>
-    <a class="contact-item" href="https://github.com/Habrovan004" target="_blank">
-      <div class="contact-label">GitHub</div>
-      <div class="contact-val">github.com/Habrovan004</div>
-    </a>
-    <a class="contact-item" href="https://www.linkedin.com/in/hagai-mkawe-96224b357/" target="_blank">
-      <div class="contact-label">LinkedIn</div>
-      <div class="contact-val">Hagai Mkawe</div>
-    </a>
-    <div class="contact-item">
-      <div class="contact-label">Location</div>
-      <div class="contact-val">Dar es Salaam, Tanzania</div>
+  <div class="contact-layout reveal">
+
+    <div>
+      <p class="contact-info-title">Get in touch</p>
+      <p class="contact-info-desc">Have a project in mind, want to collaborate, or just want to say hi? Fill in the form and I'll get back to you as soon as possible.</p>
+      <div class="contact-links">
+        <a class="contact-item" href="mailto:mkawehagai@gmail.com">
+          <div class="contact-label">Email</div>
+          <div class="contact-val">mkawehagai@gmail.com</div>
+        </a>
+        <a class="contact-item" href="https://github.com/Habrovan004" target="_blank">
+          <div class="contact-label">GitHub</div>
+          <div class="contact-val">github.com/Habrovan004</div>
+        </a>
+        <a class="contact-item" href="https://www.linkedin.com/in/hagai-mkawe-96224b357/" target="_blank">
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-val">Hagai Mkawe</div>
+        </a>
+        <div class="contact-item">
+          <div class="contact-label">Location</div>
+          <div class="contact-val">Dar es Salaam, Tanzania</div>
+        </div>
+      </div>
     </div>
+
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" placeholder="your@email.com" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cf-subject">Subject</label>
+        <input type="text" id="cf-subject" placeholder="What's this about?" />
+      </div>
+      <div class="form-group">
+        <label for="cf-message">Message</label>
+        <textarea id="cf-message" rows="5" placeholder="Tell me about your project or idea..." required></textarea>
+      </div>
+      <button class="form-submit" id="cf-submit" onclick="sendEmail()">
+        Send Message
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+      <div class="form-status" id="cf-status"></div>
+    </div>
+
   </div>
 </section>
 
@@ -507,6 +594,59 @@ footer{
 </div>
 
 <script>
+// EmailJS — replace these with your real IDs from emailjs.com
+// 1. Sign up at https://www.emailjs.com
+// 2. Create a service (Gmail) → copy Service ID
+// 3. Create an email template → copy Template ID
+// 4. Go to Account → copy Public Key
+const EMAILJS_PUBLIC_KEY  = "TZhdYbEGFkrlwCbG6";
+const EMAILJS_SERVICE_ID  = "service_kcwhq7j";
+const EMAILJS_TEMPLATE_ID = "template_vjzlgds";
+
+emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+function sendEmail() {
+  const name    = document.getElementById('cf-name').value.trim();
+  const email   = document.getElementById('cf-email').value.trim();
+  const subject = document.getElementById('cf-subject').value.trim();
+  const message = document.getElementById('cf-message').value.trim();
+  const status  = document.getElementById('cf-status');
+  const btn     = document.getElementById('cf-submit');
+
+  if (!name || !email || !message) {
+    status.className = 'form-status error';
+    status.textContent = 'Please fill in name, email, and message.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  status.className = 'form-status';
+
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+    from_name:    name,
+    from_email:   email,
+    subject:      subject || 'Portfolio contact',
+    message:      message,
+    to_email:     'mkawehagai@gmail.com'
+  }).then(() => {
+    status.className = 'form-status success';
+    status.textContent = 'Message sent! I\'ll get back to you soon.';
+    btn.disabled = false;
+    btn.innerHTML = 'Send Message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+    document.getElementById('cf-name').value = '';
+    document.getElementById('cf-email').value = '';
+    document.getElementById('cf-subject').value = '';
+    document.getElementById('cf-message').value = '';
+  }).catch(() => {
+    status.className = 'form-status error';
+    status.textContent = 'Something went wrong. Please email me directly at mkawehagai@gmail.com';
+    btn.disabled = false;
+    btn.innerHTML = 'Try Again';
+  });
+}
+
+
 function toggleMenu(){
   document.getElementById('hamburger').classList.toggle('open');
   document.getElementById('mobileMenu').classList.toggle('open');
