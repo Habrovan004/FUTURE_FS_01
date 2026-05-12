@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -11,7 +11,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
+/* ── DARK THEME (default) ── */
+[data-theme="dark"] {
   --bg:#0b0d11;
   --surface:#13151a;
   --surface2:#1a1d24;
@@ -23,7 +24,27 @@
   --accent2:#7c5cbf;
   --accent-glow:rgba(79,142,247,0.18);
   --green:#3ecf8e;
+  --shadow:rgba(0,0,0,0.4);
+  --orb-opacity:0.3;
 }
+
+/* ── LIGHT THEME ── */
+[data-theme="light"] {
+  --bg:#f5f4f0;
+  --surface:#ffffff;
+  --surface2:#f0eeea;
+  --border:#00000010;
+  --border-hover:#00000020;
+  --text:#1a1814;
+  --muted:#6b6860;
+  --accent:#3b7de8;
+  --accent2:#6b4ab0;
+  --accent-glow:rgba(59,125,232,0.12);
+  --green:#2ab87a;
+  --shadow:rgba(0,0,0,0.08);
+  --orb-opacity:0.12;
+}
+
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
@@ -33,12 +54,13 @@ body{
   font-size:15px;
   line-height:1.7;
   overflow-x:hidden;
+  transition:background 0.35s ease, color 0.35s ease;
 }
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--border-hover);border-radius:2px;}
 
-/* NAV */
+/* ── NAV ── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;justify-content:space-between;align-items:center;
@@ -47,6 +69,9 @@ nav{
   backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
   transition:background 0.3s;
+}
+[data-theme="light"] nav {
+  background:rgba(245,244,240,0.88);
 }
 .nav-logo{
   font-family:'Syne',sans-serif;font-weight:800;font-size:18px;
@@ -65,6 +90,27 @@ nav{
   transition:opacity 0.2s !important;
 }
 .nav-cta:hover{opacity:0.85;}
+
+/* ── THEME TOGGLE ── */
+.theme-toggle {
+  background: var(--surface);
+  border: 1px solid var(--border-hover);
+  border-radius: 100px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: var(--muted);
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--text); }
+.theme-toggle .toggle-icon { font-size: 14px; transition: transform 0.4s ease; }
+[data-theme="light"] .theme-toggle .toggle-icon { transform: rotate(180deg); }
+
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
 .hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s;}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
@@ -83,7 +129,7 @@ nav{
 .mobile-menu a:hover{color:var(--text);background:var(--surface2);}
 .mobile-menu.open{display:flex;}
 
-/* HERO */
+/* ── HERO ── */
 .hero{
   min-height:100vh;
   display:flex;flex-direction:column;justify-content:center;
@@ -91,7 +137,7 @@ nav{
   position:relative;overflow:hidden;
 }
 .hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0;}
-.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.3;}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:var(--orb-opacity);}
 .orb1{
   width:520px;height:520px;
   background:radial-gradient(circle,#4f8ef7 0%,transparent 70%);
@@ -104,9 +150,8 @@ nav{
   bottom:-100px;left:-60px;
   animation:orb-drift 13s ease-in-out infinite alternate-reverse;
 }
-@keyframes orb-drift{
-  from{transform:translate(0,0);}to{transform:translate(30px,20px);}
-}
+@keyframes orb-drift{from{transform:translate(0,0);}to{transform:translate(30px,20px);}}
+
 .hero-grid{
   position:relative;z-index:1;
   display:grid;grid-template-columns:1fr auto;gap:3rem;
@@ -161,11 +206,12 @@ nav{
 }
 .btn-outline:hover{background:var(--surface);border-color:var(--muted);transform:translateY(-1px);}
 
-/* HERO CARD */
+/* ── HERO CARD ── */
 .hero-card{
   background:var(--surface);border:1px solid var(--border);
   border-radius:18px;padding:1.75rem;width:220px;flex-shrink:0;
   animation:fade-up 0.7s 0.35s ease both;
+  box-shadow: 0 8px 32px var(--shadow);
 }
 .hero-avatar{
   width:60px;height:60px;border-radius:50%;
@@ -182,7 +228,7 @@ nav{
 .hero-stat-label{font-size:11px;color:var(--muted);}
 .hero-stat-val{font-size:13px;font-weight:600;font-family:'Syne',sans-serif;color:var(--accent);}
 
-/* SECTIONS */
+/* ── SECTIONS ── */
 section{
   padding:5rem 2.5rem;
   border-top:1px solid var(--border);
@@ -197,7 +243,7 @@ section{
   letter-spacing:-0.02em;margin-bottom:2.5rem;
 }
 
-/* ABOUT */
+/* ── ABOUT ── */
 .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:3rem;align-items:start;}
 .about-text{color:var(--muted);font-size:15px;}
 .about-text p+p{margin-top:1rem;}
@@ -205,7 +251,8 @@ section{
 .stat-card{
   background:var(--surface);border:1px solid var(--border);border-radius:12px;
   padding:1.25rem;text-align:center;
-  transition:border-color 0.2s,transform 0.2s;
+  transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 2px 8px var(--shadow);
 }
 .stat-card:hover{border-color:var(--border-hover);transform:translateY(-2px);}
 .stat-num{
@@ -215,11 +262,12 @@ section{
 }
 .stat-desc{font-size:12px;color:var(--muted);margin-top:4px;}
 
-/* SKILLS */
+/* ── SKILLS ── */
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;}
 .skill-card{
   background:var(--surface);border:1px solid var(--border);border-radius:12px;
   padding:1rem 1.15rem;transition:border-color 0.2s,transform 0.2s;
+  box-shadow:0 2px 8px var(--shadow);
 }
 .skill-card:hover{border-color:var(--accent);transform:translateY(-2px);}
 .skill-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
@@ -232,27 +280,35 @@ section{
   width:0;transition:width 1.2s cubic-bezier(0.4,0,0.2,1);
 }
 
-/* PROJECTS */
+/* ── PROJECTS ── */
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
 .project-card{
   background:var(--surface);border:1px solid var(--border);border-radius:16px;
   padding:1.5rem;display:flex;flex-direction:column;gap:12px;
-  transition:border-color 0.25s,transform 0.25s;position:relative;overflow:hidden;
+  transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;
+  position:relative;overflow:hidden;
+  box-shadow:0 2px 12px var(--shadow);
 }
 .project-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
   opacity:0;transition:opacity 0.25s;
 }
-.project-card:hover{border-color:var(--border-hover);transform:translateY(-3px);}
+.project-card:hover{border-color:var(--border-hover);transform:translateY(-3px);box-shadow:0 8px 24px var(--shadow);}
 .project-card:hover::before{opacity:1;}
 .project-top{display:flex;justify-content:space-between;align-items:flex-start;}
 .project-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.project-links{display:flex;gap:10px;align-items:center;flex-shrink:0;}
 .project-link{
   font-size:12px;color:var(--accent);text-decoration:none;
   display:flex;align-items:center;gap:4px;opacity:0.8;transition:opacity 0.2s;
+  white-space:nowrap;
 }
 .project-link:hover{opacity:1;}
+.project-link.live{
+  background:var(--accent-glow);border:1px solid var(--accent);
+  padding:3px 10px;border-radius:100px;font-size:11px;font-weight:500;
+}
 .project-desc{font-size:13px;color:var(--muted);line-height:1.65;flex:1;}
 .project-tags{display:flex;flex-wrap:wrap;gap:6px;}
 .tag{
@@ -260,11 +316,12 @@ section{
   background:var(--surface2);color:var(--muted);border:1px solid var(--border);
 }
 
-/* EDUCATION */
+/* ── EDUCATION ── */
 .edu-card{
   background:var(--surface);border:1px solid var(--border);border-radius:14px;
   padding:1.5rem 1.75rem;max-width:600px;
   display:flex;gap:1.25rem;align-items:flex-start;transition:border-color 0.2s;
+  box-shadow:0 2px 8px var(--shadow);
 }
 .edu-card:hover{border-color:var(--accent);}
 .edu-icon{
@@ -280,21 +337,7 @@ section{
   color:var(--muted);padding:3px 12px;border-radius:100px;
 }
 
-/* CONTACT */
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;}
-.contact-item{
-  background:var(--surface);border:1px solid var(--border);border-radius:12px;
-  padding:1.15rem 1.35rem;text-decoration:none;display:block;
-  transition:border-color 0.2s,transform 0.2s;
-}
-.contact-item:hover{border-color:var(--accent);transform:translateY(-2px);}
-.contact-label{
-  font-size:11px;color:var(--muted);text-transform:uppercase;
-  letter-spacing:0.07em;margin-bottom:6px;
-}
-.contact-val{font-size:13px;font-weight:500;color:var(--accent);word-break:break-all;}
-
-/* CONTACT FORM */
+/* ── CONTACT ── */
 .contact-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:2.5rem;align-items:start;}
 .contact-info-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:0.5rem;}
 .contact-info-desc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:1.75rem;}
@@ -303,12 +346,14 @@ section{
   background:var(--surface);border:1px solid var(--border);border-radius:12px;
   padding:1rem 1.25rem;text-decoration:none;display:block;
   transition:border-color 0.2s,transform 0.2s;
+  box-shadow:0 2px 8px var(--shadow);
 }
 .contact-item:hover{border-color:var(--accent);transform:translateY(-2px);}
 .contact-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;}
 .contact-val{font-size:13px;font-weight:500;color:var(--accent);word-break:break-all;}
 .contact-form{
   background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.75rem;
+  box-shadow:0 2px 12px var(--shadow);
 }
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
 .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
@@ -337,12 +382,8 @@ section{
 }
 .form-status.success{background:rgba(62,207,142,0.12);color:#3ecf8e;border:1px solid rgba(62,207,142,0.25);display:block;}
 .form-status.error{background:rgba(226,75,74,0.12);color:#e24b4a;border:1px solid rgba(226,75,74,0.25);display:block;}
-@media(max-width:768px){
-  .contact-layout{grid-template-columns:1fr;}
-  .form-row{grid-template-columns:1fr;}
-}
 
-/* FOOTER */
+/* ── FOOTER ── */
 .footer-wrap{border-top:1px solid var(--border);}
 footer{
   max-width:1050px;margin:0 auto;padding:2rem 2.5rem;
@@ -353,14 +394,12 @@ footer{
 .footer-links a{color:var(--muted);text-decoration:none;transition:color 0.2s;}
 .footer-links a:hover{color:var(--text);}
 
-/* ANIMATIONS */
-@keyframes fade-up{
-  from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}
-}
+/* ── ANIMATIONS ── */
+@keyframes fade-up{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
-/* RESPONSIVE */
+/* ── RESPONSIVE ── */
 @media(max-width:768px){
   nav{padding:1rem 1.25rem;}
   .nav-links{display:none;}
@@ -372,6 +411,8 @@ footer{
   .about-grid{grid-template-columns:1fr;}
   .section-title{font-size:26px;}
   footer{flex-direction:column;gap:1rem;text-align:center;}
+  .contact-layout{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
 }
 @media(max-width:480px){
   .hero-btns{flex-direction:column;}
@@ -390,10 +431,17 @@ footer{
     <a href="#education">Education</a>
     <a href="#contact" class="nav-cta">Contact</a>
   </div>
-  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
+  <div style="display:flex;align-items:center;gap:14px;">
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+      <span class="toggle-icon">🌙</span>
+      <span id="themeLabel">Light</span>
+    </button>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
+
 <div class="mobile-menu" id="mobileMenu">
   <a href="#about" onclick="closeMenu()">About</a>
   <a href="#skills" onclick="closeMenu()">Skills</a>
@@ -402,6 +450,7 @@ footer{
   <a href="#contact" onclick="closeMenu()">Contact</a>
 </div>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg">
     <div class="hero-orb orb1"></div>
@@ -414,7 +463,7 @@ footer{
         Available for opportunities
       </div>
       <h1>Hagai John<br><span class="line2">Mkawe</span></h1>
-      <p class="hero-desc">Full Stack Developer &amp; CS Student at Ardhi University. I build web and mobile applications that solve real-world problems — from telemedicine platforms to collaborative tools.</p>
+      <p class="hero-desc">Full Stack Developer &amp; CS Student at Ardhi University, Dar es Salaam. I build web and mobile applications that solve real-world problems — from maternal health telemedicine to boutique e-commerce platforms.</p>
       <div class="hero-btns">
         <a href="#projects" class="btn-primary">
           View My Work
@@ -439,6 +488,7 @@ footer{
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <p class="section-label">About</p>
   <h2 class="section-title">Who I am</h2>
@@ -456,6 +506,7 @@ footer{
   </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
   <p class="section-label">Skills</p>
   <h2 class="section-title">What I work with</h2>
@@ -473,43 +524,89 @@ footer{
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
   <p class="section-label">Projects</p>
   <h2 class="section-title">Things I've built</h2>
   <div class="projects-grid reveal">
+
+    <!-- MamaCare -->
     <div class="project-card">
-      <div class="project-top"><span class="project-title">MamaCare</span><a class="project-link" href="https://github.com/Habrovan004" target="_blank">GitHub ↗</a></div>
-      <p class="project-desc">A telemedicine Flutter/Firebase mobile app for prenatal and maternal health, supporting dual roles — patient and healthcare provider — with real-time features.</p>
+      <div class="project-top">
+        <span class="project-title">MamaCare</span>
+        <div class="project-links">
+          <a class="project-link" href="https://github.com/Habrovan004/MamaCare" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+      <p class="project-desc">A telemedicine Flutter/Firebase mobile app for prenatal and maternal health in Tanzania, supporting dual roles — patient and healthcare provider — with real-time chat and ANC records.</p>
       <div class="project-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span><span class="tag">Dart</span></div>
     </div>
+
+    <!-- Lumière Boutique -->
     <div class="project-card">
-      <div class="project-top"><span class="project-title">Lumière</span><a class="project-link" href="https://github.com/Habrovan004" target="_blank">GitHub ↗</a></div>
-      <p class="project-desc">A full-stack photo album web app with user authentication, album management, and media storage built with Next.js, Express.js, and MySQL.</p>
-      <div class="project-tags"><span class="tag">Next.js</span><span class="tag">Express.js</span><span class="tag">MySQL</span></div>
+      <div class="project-top">
+        <span class="project-title">Lumière Boutique</span>
+        <div class="project-links">
+          <a class="project-link live" href="http://mkawehaga.me/FUTURE_FS_01/task2/" target="_blank">Live ↗</a>
+          <a class="project-link" href="https://github.com/Habrovan004/FUTURE_FS_01/tree/master/task2" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
+      <p class="project-desc">A professional boutique fashion website for a Dar es Salaam-based business. Features a shopping cart drawer, 3-step booking modal, scroll animations, and a fully responsive luxury UI.</p>
+      <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
     </div>
+
+    <!-- ByteUjamaa Appointment -->
     <div class="project-card">
-      <div class="project-top"><span class="project-title">ByteUjamaa Appointment</span><a class="project-link" href="https://github.com/ByteUjamaa/Appointment" target="_blank">GitHub ↗</a></div>
+      <div class="project-top">
+        <span class="project-title">ByteUjamaa Appointment</span>
+        <div class="project-links">
+          <a class="project-link" href="https://github.com/ByteUjamaa/Appointment" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
       <p class="project-desc">An appointment booking and management system allowing users to schedule, track, and manage appointments efficiently.</p>
       <div class="project-tags"><span class="tag">JavaScript</span></div>
     </div>
+
+    <!-- Students Internship Placement -->
     <div class="project-card">
-      <div class="project-top"><span class="project-title">Students Internship Placement</span><a class="project-link" href="https://github.com/Habrovan004/students-internship-placement-system" target="_blank">GitHub ↗</a></div>
+      <div class="project-top">
+        <span class="project-title">Students Internship Placement</span>
+        <div class="project-links">
+          <a class="project-link" href="https://github.com/Habrovan004/students-internship-placement-system" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
       <p class="project-desc">A Python-based system to manage and automate student internship placement workflows for academic institutions.</p>
       <div class="project-tags"><span class="tag">Python</span></div>
     </div>
+
+    <!-- mysite.django -->
     <div class="project-card">
-      <div class="project-top"><span class="project-title">mysite.django</span><a class="project-link" href="https://github.com/Habrovan004" target="_blank">GitHub ↗</a></div>
+      <div class="project-top">
+        <span class="project-title">mysite.django</span>
+        <div class="project-links">
+          <a class="project-link" href="https://github.com/Habrovan004/mysite.django" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
       <p class="project-desc">A Django-based personal website demonstrating backend web development with Python, including routing, views, and templating.</p>
       <div class="project-tags"><span class="tag">Python</span><span class="tag">Django</span></div>
     </div>
+
+    <!-- Collaborative Bucket List -->
     <div class="project-card">
-      <div class="project-top"><span class="project-title">Collaborative Bucket List</span><a class="project-link" href="https://github.com/tina-codertz/collaborative_bucket_list" target="_blank">GitHub ↗</a></div>
+      <div class="project-top">
+        <span class="project-title">Collaborative Bucket List</span>
+        <div class="project-links">
+          <a class="project-link" href="https://github.com/tina-codertz/collaborative_bucket_list" target="_blank">GitHub ↗</a>
+        </div>
+      </div>
       <p class="project-desc">A collaborative to-do app where users create lists, others comment and give insights, and completed events can be marked off.</p>
       <div class="project-tags"><span class="tag">JavaScript</span></div>
     </div>
+
   </div>
 </section>
 
+<!-- EDUCATION -->
 <section id="education">
   <p class="section-label">Education</p>
   <h2 class="section-title">Where I study</h2>
@@ -525,11 +622,11 @@ footer{
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <p class="section-label">Contact</p>
   <h2 class="section-title">Let's work together</h2>
   <div class="contact-layout reveal">
-
     <div>
       <p class="contact-info-title">Get in touch</p>
       <p class="contact-info-desc">Have a project in mind, want to collaborate, or just want to say hi? Fill in the form and I'll get back to you as soon as possible.</p>
@@ -552,7 +649,6 @@ footer{
         </div>
       </div>
     </div>
-
     <div class="contact-form">
       <div class="form-row">
         <div class="form-group">
@@ -578,7 +674,6 @@ footer{
       </button>
       <div class="form-status" id="cf-status"></div>
     </div>
-
   </div>
 </section>
 
@@ -594,15 +689,33 @@ footer{
 </div>
 
 <script>
-// EmailJS — replace these with your real IDs from emailjs.com
-// 1. Sign up at https://www.emailjs.com
-// 2. Create a service (Gmail) → copy Service ID
-// 3. Create an email template → copy Template ID
-// 4. Go to Account → copy Public Key
+/* ── THEME TOGGLE ── */
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  const newTheme = isDark ? 'light' : 'dark';
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  document.getElementById('themeLabel').textContent = isDark ? 'Dark' : 'Light';
+  document.getElementById('themeBtn').querySelector('.toggle-icon').textContent = isDark ? '☀️' : '🌙';
+  // Update nav bg
+  updateNavBg();
+}
+
+// Load saved theme on page load
+(function() {
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  if (saved === 'light') {
+    document.getElementById('themeLabel').textContent = 'Dark';
+    document.getElementById('themeBtn').querySelector('.toggle-icon').textContent = '☀️';
+  }
+})();
+
+/* ── EMAILJS ── */
 const EMAILJS_PUBLIC_KEY  = "TZhdYbEGFkrlwCbG6";
 const EMAILJS_SERVICE_ID  = "service_kcwhq7j";
 const EMAILJS_TEMPLATE_ID = "template_vjzlgds";
-
 emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
 function sendEmail() {
@@ -612,32 +725,24 @@ function sendEmail() {
   const message = document.getElementById('cf-message').value.trim();
   const status  = document.getElementById('cf-status');
   const btn     = document.getElementById('cf-submit');
-
   if (!name || !email || !message) {
     status.className = 'form-status error';
     status.textContent = 'Please fill in name, email, and message.';
     return;
   }
-
   btn.disabled = true;
   btn.textContent = 'Sending…';
   status.className = 'form-status';
-
   emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-    from_name:    name,
-    from_email:   email,
-    subject:      subject || 'Portfolio contact',
-    message:      message,
-    to_email:     'mkawehagai@gmail.com'
+    from_name: name, from_email: email,
+    subject: subject || 'Portfolio contact',
+    message: message, to_email: 'mkawehagai@gmail.com'
   }).then(() => {
     status.className = 'form-status success';
-    status.textContent = 'Message sent! I\'ll get back to you soon.';
+    status.textContent = "Message sent! I'll get back to you soon.";
     btn.disabled = false;
     btn.innerHTML = 'Send Message <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
-    document.getElementById('cf-name').value = '';
-    document.getElementById('cf-email').value = '';
-    document.getElementById('cf-subject').value = '';
-    document.getElementById('cf-message').value = '';
+    ['cf-name','cf-email','cf-subject','cf-message'].forEach(id => document.getElementById(id).value = '');
   }).catch(() => {
     status.className = 'form-status error';
     status.textContent = 'Something went wrong. Please email me directly at mkawehagai@gmail.com';
@@ -646,7 +751,7 @@ function sendEmail() {
   });
 }
 
-
+/* ── MOBILE MENU ── */
 function toggleMenu(){
   document.getElementById('hamburger').classList.toggle('open');
   document.getElementById('mobileMenu').classList.toggle('open');
@@ -655,22 +760,30 @@ function closeMenu(){
   document.getElementById('hamburger').classList.remove('open');
   document.getElementById('mobileMenu').classList.remove('open');
 }
+
+/* ── SCROLL REVEAL + SKILL BARS ── */
 const revealEls = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
       e.target.classList.add('visible');
-      e.target.querySelectorAll('.skill-bar').forEach(b=>{
-        setTimeout(()=>{ b.style.width = b.dataset.width; },100);
+      e.target.querySelectorAll('.skill-bar').forEach(b => {
+        setTimeout(() => { b.style.width = b.dataset.width; }, 100);
       });
     }
   });
-},{threshold:0.12});
-revealEls.forEach(el=>observer.observe(el));
-window.addEventListener('scroll',()=>{
-  document.querySelector('nav').style.background =
-    window.scrollY > 50 ? 'rgba(11,13,17,0.96)' : 'rgba(11,13,17,0.82)';
-});
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+
+/* ── NAV SCROLL ── */
+function updateNavBg() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const scrolled = window.scrollY > 50;
+  document.querySelector('nav').style.background = scrolled
+    ? (isLight ? 'rgba(245,244,240,0.98)' : 'rgba(11,13,17,0.96)')
+    : (isLight ? 'rgba(245,244,240,0.88)' : 'rgba(11,13,17,0.82)');
+}
+window.addEventListener('scroll', updateNavBg);
 </script>
 </body>
 </html>
