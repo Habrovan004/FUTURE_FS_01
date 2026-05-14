@@ -311,10 +311,28 @@ section{
 }
 .project-desc{font-size:13px;color:var(--muted);line-height:1.65;flex:1;}
 .project-tags{display:flex;flex-wrap:wrap;gap:6px;}
+
+/* ── TAG COLOR SYSTEM ── */
 .tag{
   font-size:11px;font-weight:500;padding:4px 11px;border-radius:100px;
   background:var(--surface2);color:var(--muted);border:1px solid var(--border);
 }
+/* Language-specific tag colors */
+.tag-react    { background:rgba(97,218,251,0.10); color:#61dafb; border-color:rgba(97,218,251,0.25); }
+.tag-flutter  { background:rgba(79,195,247,0.10); color:#4fc3f7; border-color:rgba(79,195,247,0.25); }
+.tag-firebase { background:rgba(255,193,7,0.10);  color:#ffc107; border-color:rgba(255,193,7,0.25); }
+.tag-django   { background:rgba(9,188,138,0.10);  color:#09bc8a; border-color:rgba(9,188,138,0.25); }
+.tag-drf      { background:rgba(9,188,138,0.08);  color:#09bc8a; border-color:rgba(9,188,138,0.20); }
+.tag-python   { background:rgba(255,212,59,0.10); color:#ffd43b; border-color:rgba(255,212,59,0.25); }
+.tag-dart     { background:rgba(0,180,240,0.10);  color:#00b4f0; border-color:rgba(0,180,240,0.25); }
+.tag-html     { background:rgba(228,77,38,0.10);  color:#e44d26; border-color:rgba(228,77,38,0.25); }
+.tag-css      { background:rgba(21,114,182,0.10); color:#1572b6; border-color:rgba(21,114,182,0.25); }
+.tag-js       { background:rgba(247,223,30,0.10); color:#f7df1e; border-color:rgba(247,223,30,0.25); }
+.tag-ts       { background:rgba(49,120,198,0.10); color:#3178c6; border-color:rgba(49,120,198,0.25); }
+.tag-docker   { background:rgba(13,183,237,0.10); color:#0db7ed; border-color:rgba(13,183,237,0.25); }
+.tag-nextjs   { background:rgba(240,240,240,0.08);color:#d4d4d4; border-color:rgba(240,240,240,0.15); }
+.tag-mysql    { background:rgba(0,117,143,0.10);  color:#00758f; border-color:rgba(0,117,143,0.25); }
+.tag-mongodb  { background:rgba(71,162,72,0.10);  color:#47a248; border-color:rgba(71,162,72,0.25); }
 
 /* ── EDUCATION ── */
 .edu-card{
@@ -538,8 +556,12 @@ footer{
           <a class="project-link" href="https://github.com/Habrovan004/MamaCare" target="_blank">GitHub ↗</a>
         </div>
       </div>
-      <p class="project-desc">A telemedicine Flutter/Firebase mobile app for prenatal and maternal health in Tanzania, supporting dual roles — patient and healthcare provider — with real-time chat and ANC records.</p>
-      <div class="project-tags"><span class="tag">Flutter</span><span class="tag">Firebase</span><span class="tag">Dart</span></div>
+      <p class="project-desc">A telemedicine mobile app for prenatal and maternal health in Tanzania, supporting dual roles — patient and healthcare provider — with real-time chat and ANC records.</p>
+      <div class="project-tags">
+        <span class="tag tag-flutter">Flutter</span>
+        <span class="tag tag-firebase">Firebase</span>
+        <span class="tag tag-dart">Dart</span>
+      </div>
     </div>
 
     <!-- Lumière Boutique -->
@@ -552,19 +574,29 @@ footer{
         </div>
       </div>
       <p class="project-desc">A professional boutique fashion website for a Dar es Salaam-based business. Features a shopping cart drawer, 3-step booking modal, scroll animations, and a fully responsive luxury UI.</p>
-      <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+      <div class="project-tags">
+        <span class="tag tag-html">HTML</span>
+        <span class="tag tag-css">CSS</span>
+        <span class="tag tag-js">JavaScript</span>
+      </div>
     </div>
 
-    <!-- ByteUjamaa Appointment -->
+    <!-- University Consultation Appointment -->
     <div class="project-card">
       <div class="project-top">
-        <span class="project-title">ByteUjamaa Appointment</span>
+        <span class="project-title">University Consultation Appointment</span>
         <div class="project-links">
           <a class="project-link" href="https://github.com/ByteUjamaa/Appointment" target="_blank">GitHub ↗</a>
         </div>
       </div>
-      <p class="project-desc">An appointment booking and management system allowing users to schedule, track, and manage appointments efficiently.</p>
-      <div class="project-tags"><span class="tag">JavaScript</span></div>
+      <p class="project-desc">A web-based Consultation Appointment System for universities. Students request consultations with lecturers, track project progress, and view appointment reports — lecturers manage sessions physically or via video conferencing.</p>
+      <div class="project-tags">
+        <span class="tag tag-react">React</span>
+        <span class="tag tag-django">Django</span>
+        <span class="tag tag-drf">Django REST</span>
+        <span class="tag tag-python">Python</span>
+        <span class="tag tag-js">JavaScript</span>
+      </div>
     </div>
 
     <!-- Students Internship Placement -->
@@ -576,7 +608,9 @@ footer{
         </div>
       </div>
       <p class="project-desc">A Python-based system to manage and automate student internship placement workflows for academic institutions.</p>
-      <div class="project-tags"><span class="tag">Python</span></div>
+      <div class="project-tags">
+        <span class="tag tag-python">Python</span>
+      </div>
     </div>
 
     <!-- mysite.django -->
@@ -588,7 +622,10 @@ footer{
         </div>
       </div>
       <p class="project-desc">A Django-based personal website demonstrating backend web development with Python, including routing, views, and templating.</p>
-      <div class="project-tags"><span class="tag">Python</span><span class="tag">Django</span></div>
+      <div class="project-tags">
+        <span class="tag tag-python">Python</span>
+        <span class="tag tag-django">Django</span>
+      </div>
     </div>
 
     <!-- Collaborative Bucket List -->
@@ -599,8 +636,15 @@ footer{
           <a class="project-link" href="https://github.com/tina-codertz/collaborative_bucket_list" target="_blank">GitHub ↗</a>
         </div>
       </div>
-      <p class="project-desc">A collaborative to-do app where users create lists, others comment and give insights, and completed events can be marked off.</p>
-      <div class="project-tags"><span class="tag">JavaScript</span></div>
+      <p class="project-desc">A collaborative app where users create bucket-list items, upvote others, and leave encouragement comments. Features a React frontend and a Django REST Framework backend, containerized with Docker and Nginx.</p>
+      <div class="project-tags">
+        <span class="tag tag-react">React</span>
+        <span class="tag tag-ts">TypeScript</span>
+        <span class="tag tag-django">Django</span>
+        <span class="tag tag-drf">Django REST</span>
+        <span class="tag tag-python">Python</span>
+        <span class="tag tag-docker">Docker</span>
+      </div>
     </div>
 
   </div>
@@ -698,11 +742,9 @@ function toggleTheme() {
   localStorage.setItem('theme', newTheme);
   document.getElementById('themeLabel').textContent = isDark ? 'Dark' : 'Light';
   document.getElementById('themeBtn').querySelector('.toggle-icon').textContent = isDark ? '☀️' : '🌙';
-  // Update nav bg
   updateNavBg();
 }
 
-// Load saved theme on page load
 (function() {
   const saved = localStorage.getItem('theme') || 'dark';
   document.documentElement.setAttribute('data-theme', saved);
